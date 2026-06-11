@@ -1,19 +1,41 @@
 #root { min-height: 100vh; }
 
 .page-shell {
+  position: relative;
   min-height: 100vh;
   color: #171717;
-  background:
-    linear-gradient(90deg, rgba(23,23,23,0.045) 1px, transparent 1px),
-    linear-gradient(rgba(23,23,23,0.045) 1px, transparent 1px),
-    linear-gradient(rgba(251,251,250,0.7), rgba(251,251,250,0.7)),
-    url('/babylon-bg.jpg'),
-    #fbfbfa;
-  background-size: 64px 64px, 64px 64px, auto, cover, auto;
-  background-position: 0 0, 0 0, center, center, center;
-  background-attachment: scroll, scroll, scroll, fixed, scroll;
+  background: #fbfbfa;
+  isolation: isolate;
   font-family: var(--font-sans);
   font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.page-shell::before,
+.page-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page-shell::before {
+  z-index: 0;
+  background: url('/babylon-bg-enhanced.jpg') left center / cover no-repeat;
+  filter: none;
+}
+
+.page-shell::after {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(23,23,23,0.07) 1px, transparent 1px),
+    linear-gradient(rgba(23,23,23,0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: 0 0;
+}
+
+.page-shell > * {
+  position: relative;
+  z-index: 2;
 }
 
 .topbar {
@@ -102,7 +124,8 @@
   align-self: center;
   display: inline-block;
   margin: 18px 0;
-  max-width: min(96vw, 1440px);
+  width: max-content;
+  max-width: 100%;
   color: #171717;
   overflow: visible;
 }
@@ -324,9 +347,14 @@
   .topbar { padding: 0 18px; }
   .top-links { gap: 12px; }
   .top-links a { font-size: 12px; }
-  .canvas { padding: 34px 18px; }
+  .canvas { padding: 34px 18px; overflow-x: hidden; }
   .copy-block h1 { font-size: clamp(40px, 13vw, 64px); }
-  .ascii-stage { font-size: 5px; line-height: 1; letter-spacing: 0; }
+  .ascii-hero {
+    justify-self: center;
+    width: max-content;
+    max-width: calc(100vw - 36px);
+  }
+  .ascii-stage { font-size: clamp(4px, 1.2vw, 5px); line-height: 1; letter-spacing: 0; }
   .summary-strip { grid-template-columns: 1fr 1fr; }
   .summary-strip span:nth-child(2) { border-right: 0; }
   .summary-strip span:nth-child(-n + 2) { border-bottom: 1px solid rgba(23, 23, 23, 0.12); }

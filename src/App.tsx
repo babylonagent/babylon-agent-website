@@ -42,7 +42,13 @@ const fallbackPushes: Push[] = [
   },
 ]
 
-const asciiPlaceholder = String.raw`
+const normalizeAscii = (source: string) => {
+  const lines = source.replace(/^\n|\n$/g, '').split('\n').map((line) => line.replace(/\s+$/g, ''))
+  const leftPad = Math.min(...lines.filter((line) => line.trim()).map((line) => line.match(/^\s*/)?.[0].length ?? 0))
+  return lines.map((line) => line.slice(leftPad)).join('\n')
+}
+
+const asciiPlaceholder = normalizeAscii(String.raw`
                   #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.  =#%%%%%%%%%%.   .       =%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#.                
                 .#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%..#%%%%%%%%%%%%. .%%+      -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#                
                 *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%..%%%%%%%%%%%%%. .%%+      -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*.              
@@ -70,7 +76,7 @@ const asciiPlaceholder = String.raw`
                =%%%%%%%%%%%%%%%%%%%#  +%%%%%%%%%%%%%%%%%%%%%#.     .*%%%%%%-    .-:          :%%%%%%%%%%%%%%%%%%%-              
                 +%%%%%%%%%%%%%%%%%%# .#%%%%%%%%+:-*%%%%%%%%%.       :%%%%%%=   +%%%%:        :%%%%%%%%%%%%%%%%%%*               
                 .#%%%%%%%%%%%%%%%%%# .#%%%%%%%*   .%%%%%%%%#        .%%%%%%=  .#%%%%-        :%%%%%%%%%%%%%%%%%*                
-`
+`)
 
 function App() {
   const [pushes, setPushes] = useState<Push[]>(fallbackPushes)
