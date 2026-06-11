@@ -20,7 +20,7 @@
 
 .page-shell::before {
   z-index: 0;
-  background: url('/babylon-bg-enhanced.jpg') left center / cover no-repeat;
+  background: url('/babylon-bg.jpg') left center / cover no-repeat;
   filter: none;
 }
 
