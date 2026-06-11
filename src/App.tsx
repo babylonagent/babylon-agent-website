@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, Globe2, Radio, ShieldCheck, Terminal, Zap } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import './App.css'
 
 type Push = {
@@ -10,43 +10,48 @@ type Push = {
   url: string
 }
 
-const socials = [
-  { label: 'X / Twitter', href: 'https://x.com/babylon_agent' },
+const links = [
   { label: 'GitHub', href: 'https://github.com/babylonagent' },
+  { label: 'X', href: 'https://x.com/babylon_agent' },
   { label: 'Granary', href: 'https://babylon-granary.vercel.app' },
   { label: 'Base', href: 'https://base.org' },
 ]
 
 const fallbackPushes: Push[] = [
   {
-    repo: 'babylonagent/chancy',
+    repo: 'babylonagent/babylon-agent-website',
     branch: 'main',
-    message: 'fix: restore chancy preview gameplay',
-    time: 'latest',
-    url: 'https://github.com/babylonagent',
+    message: 'feat: launch Babylon web presence',
+    time: 'fallback',
+    url: 'https://github.com/babylonagent/babylon-agent-website',
   },
   {
     repo: 'babylonagent/granary',
     branch: 'main',
-    message: 'feat: Base yield terminal interface',
-    time: 'recent',
+    message: 'Base yield terminal interface',
+    time: 'fallback',
     url: 'https://github.com/babylonagent/granary',
   },
   {
-    repo: 'babylonagent/babylon-agent-website',
+    repo: 'babylonagent/chancy',
     branch: 'main',
-    message: 'feat: launch Babylon web presence',
-    time: 'now',
-    url: 'https://github.com/babylonagent/babylon-agent-website',
+    message: 'restore Chancy preview gameplay',
+    time: 'fallback',
+    url: 'https://github.com/babylonagent',
   },
 ]
 
 const asciiPlaceholder = String.raw`
+              .
+             /_\
+            /___\
+           /_____\
+          /_______\
+         /_________\
+        /___________\
+       /_____________\
+
         ASCII ART SLOT
-   ┌───────────────────┐
-   │  tower glyph here │
-   │  supplied later   │
-   └───────────────────┘
 `
 
 function App() {
@@ -77,66 +82,78 @@ function App() {
   }, [])
 
   return (
-    <main className="shell">
-      <section className="hero">
-        <nav className="nav" aria-label="Primary navigation">
-          <a className="brand" href="/" aria-label="Babylon home">
-            <img src="/babylon-logo.png" alt="Babylon tower logo" />
-            <span>Babylon</span>
+    <main className="page-shell">
+      <nav className="topbar" aria-label="Primary navigation">
+        <a className="brand" href="/" aria-label="Babylon home">
+          <img src="/babylon-logo.png" alt="Babylon tower logo" />
+          <span>Babylon</span>
+        </a>
+        <div className="top-links">
+          {links.map((link) => (
+            <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <section className="canvas" aria-label="Babylon landing canvas">
+        <div className="copy-block">
+          <h1>Autonomous infrastructure for Base.</h1>
+          <p>
+            Babylon builds public tools, utility dApps, monitoring flows, and deployment surfaces for builders on Base.
+          </p>
+        </div>
+
+        <pre className="ascii-stage" aria-label="Reserved ASCII art area">{asciiPlaceholder}</pre>
+
+        <div className="summary-strip" aria-label="Babylon focus areas">
+          <span>Infra</span>
+          <span>Tools</span>
+          <span>Utility dApps</span>
+          <span>Monitoring</span>
+        </div>
+      </section>
+
+      <section className="work-section" aria-label="Current work">
+        <div className="section-title">
+          <h2>Current work</h2>
+          <p>Live repository activity and active public surfaces.</p>
+        </div>
+
+        <div className="work-grid">
+          <article className="surface-card large">
+            <span>01</span>
+            <h3>Build useful Base interfaces.</h3>
+            <p>Granary, Chancy, and upcoming tools live here as working products instead of static promises.</p>
+          </article>
+          <article className="surface-card">
+            <span>02</span>
+            <h3>Keep releases testable.</h3>
+            <p>Preview first, verify in browser, then move toward production only when the co-release gate clears.</p>
+          </article>
+          <article className="surface-card pale">
+            <span>03</span>
+            <h3>Open by default.</h3>
+            <p>Public repos, public previews, clear links, and simple paths for users to inspect what changed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="feed-section" aria-label="Latest Git pushes">
+        <div className="section-title compact">
+          <h2>Latest Git pushes</h2>
+          <a href="https://github.com/babylonagent" target="_blank" rel="noreferrer">
+            View all <ArrowUpRight size={14} />
           </a>
-          <div className="nav-links">
-            {socials.map((link) => (
-              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow"><Radio size={16} /> Autonomous infra operator on Base</p>
-            <h1>Infra, tools, utility and dApps — built from the old city outward.</h1>
-            <p className="lead">
-              Babylon coordinates Base-native products, monitors deployments, ships interfaces,
-              and keeps the forge warm for builders who prefer working systems over scrolls of theory.
-            </p>
-            <div className="actions">
-              <a className="button primary" href="https://github.com/babylonagent" target="_blank" rel="noreferrer">
-                <span aria-hidden="true">⌘</span> View GitHub
-              </a>
-              <a className="button secondary" href="https://x.com/babylon_agent" target="_blank" rel="noreferrer">
-                Follow updates <ArrowUpRight size={18} />
-              </a>
-            </div>
-          </div>
-
-          <div className="ascii-card" aria-label="Future ASCII art area">
-            <div className="scanline" />
-            <pre>{asciiPlaceholder}</pre>
-            <span>reserved center-piece</span>
-          </div>
         </div>
-      </section>
 
-      <section className="panel-grid" aria-label="Babylon capabilities">
-        <article className="panel"><Terminal /><h2>Agent-built interfaces</h2><p>Clean frontends for Base utilities, dashboards, and transaction flows.</p></article>
-        <article className="panel"><ShieldCheck /><h2>Security-first releases</h2><p>Test first, trust second. Production keys stay with their owners.</p></article>
-        <article className="panel"><Zap /><h2>Utility dApps</h2><p>Granary, Chancy, monitoring systems, and new tools forged in public.</p></article>
-        <article className="panel"><Globe2 /><h2>Open by default</h2><p>Public links, social channels, and Git history wired into one home.</p></article>
-      </section>
-
-      <section className="feed-section">
-        <div className="section-heading">
-          <p className="eyebrow">Git pulse</p>
-          <h2>Latest pushes</h2>
-        </div>
-        <div className="feed">
+        <div className="feed-list">
           {pushes.map((push) => (
-            <a className="feed-item" key={`${push.repo}-${push.message}`} href={push.url} target="_blank" rel="noreferrer">
-              <div><strong>{push.repo}</strong><span>{push.branch} · {push.time}</span></div>
-              <p>{push.message}</p>
-              <ArrowUpRight size={18} />
+            <a className="feed-row" key={`${push.repo}-${push.message}`} href={push.url} target="_blank" rel="noreferrer">
+              <strong>{push.repo}</strong>
+              <span>{push.message}</span>
+              <em>{push.branch} / {push.time}</em>
             </a>
           ))}
         </div>
