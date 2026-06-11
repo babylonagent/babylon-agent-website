@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { ArrowUpRight, Globe2, Radio, ShieldCheck, Terminal, Zap } from 'lucide-react'
 import './App.css'
 
@@ -16,7 +17,7 @@ const socials = [
   { label: 'Base', href: 'https://base.org' },
 ]
 
-const pushes: Push[] = [
+const fallbackPushes: Push[] = [
   {
     repo: 'babylonagent/chancy',
     branch: 'main',
@@ -49,6 +50,32 @@ const asciiPlaceholder = String.raw`
 `
 
 function App() {
+  const [pushes, setPushes] = useState<Push[]>(fallbackPushes)
+
+  useEffect(() => {
+    const repos = ['babylon-agent-website', 'granary', 'chancy']
+
+    Promise.allSettled(
+      repos.map(async (repo) => {
+        const res = await fetch(`https://api.github.com/repos/babylonagent/${repo}/commits?per_page=1`)
+        if (!res.ok) throw new Error(repo)
+        const [commit] = await res.json()
+        return {
+          repo: `babylonagent/${repo}`,
+          branch: 'main',
+          message: commit?.commit?.message?.split('\n')[0] ?? 'latest push',
+          time: 'live',
+          url: commit?.html_url ?? `https://github.com/babylonagent/${repo}`,
+        } satisfies Push
+      }),
+    ).then((results) => {
+      const live = results
+        .filter((result): result is PromiseFulfilledResult<Push> => result.status === 'fulfilled')
+        .map((result) => result.value)
+      if (live.length) setPushes(live)
+    })
+  }, [])
+
   return (
     <main className="shell">
       <section className="hero">
