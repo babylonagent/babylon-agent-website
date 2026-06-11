@@ -4,10 +4,14 @@
   min-height: 100vh;
   color: #171717;
   background:
-    linear-gradient(90deg, rgba(23,23,23,0.04) 1px, transparent 1px),
-    linear-gradient(rgba(23,23,23,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,23,23,0.045) 1px, transparent 1px),
+    linear-gradient(rgba(23,23,23,0.045) 1px, transparent 1px),
+    linear-gradient(rgba(251,251,250,0.7), rgba(251,251,250,0.7)),
+    url('/babylon-bg.jpg'),
     #fbfbfa;
-  background-size: 64px 64px;
+  background-size: 64px 64px, 64px 64px, auto, cover, auto;
+  background-position: 0 0, 0 0, center, center, center;
+  background-attachment: scroll, scroll, scroll, fixed, scroll;
   font-family: var(--font-sans);
   font-feature-settings: "liga" 1, "kern" 1;
 }
