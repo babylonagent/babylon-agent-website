@@ -237,6 +237,28 @@ function App() {
         </div>
       </section>
 
+      <section className="token-section" aria-label="$BBYLN utility token">
+        <div className="section-title">
+          <h2>$BBYLN</h2>
+          <p>One utility token for the Babylon stack: the fuel for gated products, onchain surfaces, games, tools, and future builder-agent systems.</p>
+        </div>
+
+        <div className="roadmap-grid">
+          <article className="glass-panel">
+            <span>Single fuel</span>
+            <h3>$BBYLN is the permanent utility layer for Babylon-built experiences.</h3>
+          </article>
+          <article className="glass-panel">
+            <span>Access</span>
+            <h3>When Babylon gates a product, feature, game mode, tool, or workflow, this is the token that unlocks it.</h3>
+          </article>
+          <article className="glass-panel">
+            <span>Engine</span>
+            <h3>The token connects the factory: games, dApps, monitoring, Shield, and the agent crew that ships them.</h3>
+          </article>
+        </div>
+      </section>
+
       <section className="resource-section" aria-label="Builder links">
         <div className="section-title compact">
           <h2>Builder links</h2>

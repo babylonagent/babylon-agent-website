@@ -227,14 +227,16 @@
 .work-section,
 .feed-section,
 .roadmap-section,
+.token-section,
 .resource-section {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 96px 32px;
+  padding: 72px 32px;
 }
 
-.roadmap-section { padding-bottom: 48px; }
-.resource-section { padding-top: 48px; }
+.roadmap-section { padding-top: 56px; padding-bottom: 36px; }
+.token-section { padding-top: 36px; padding-bottom: 36px; }
+.resource-section { padding-top: 36px; }
 
 .section-title {
   max-width: 760px;
@@ -420,7 +422,9 @@
   .summary-strip { grid-template-columns: 1fr 1fr; }
   .summary-strip span:nth-child(2) { border-right: 0; }
   .summary-strip span:nth-child(-n + 2) { border-bottom: 1px solid rgba(23, 23, 23, 0.12); }
-  .work-section, .feed-section, .roadmap-section, .resource-section { padding: 70px 18px; }
+  .work-section, .feed-section, .roadmap-section, .token-section, .resource-section { padding: 48px 18px; }
+  .roadmap-section { padding-top: 42px; }
+  .token-section, .resource-section { padding-top: 28px; }
   .work-grid, .roadmap-grid, .resource-grid { grid-template-columns: 1fr; }
   .surface-card.large { min-height: 380px; }
   .feed-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 0; }
