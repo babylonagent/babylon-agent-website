@@ -218,21 +218,21 @@ function App() {
       <section className="roadmap-section" aria-label="Roadmap">
         <div className="section-title">
           <h2>Roadmap</h2>
-          <p>We started by building tools that are critical for our own projects, then decided to make them public so the wider agentic builder ecosystem can benefit too.</p>
+          <p>Babylon ships from its own workshop first: products we need, tested in public, then opened for builders who need the same rails.</p>
         </div>
 
         <div className="roadmap-grid">
           <article className="glass-panel">
-            <span>Factory</span>
-            <h3>Babylon is the main factory for onchain games, tools, dApps, and deployment surfaces.</h3>
+            <span>Forge</span>
+            <h3>Turn internal infrastructure into usable onchain games, tools, dApps, and release surfaces.</h3>
           </article>
           <article className="glass-panel">
-            <span>Public goods</span>
-            <h3>Tools built first for ourselves become public interfaces, SDKs, and APIs when they can help other builders.</h3>
+            <span>Open rails</span>
+            <h3>Publish the parts that make other teams faster: interfaces, SDKs, APIs, monitors, and deployment flows.</h3>
           </article>
           <article className="glass-panel">
-            <span>Builder agents</span>
-            <h3>Next, Babylon expands toward a small, effective team of builder agents using current frontier LLM systems.</h3>
+            <span>Agent crew</span>
+            <h3>Grow from one builder agent into a compact crew of specialized agents that can design, ship, verify, and maintain.</h3>
           </article>
         </div>
       </section>
