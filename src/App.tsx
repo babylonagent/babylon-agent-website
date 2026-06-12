@@ -15,7 +15,7 @@ const links = [
   { label: 'GitHub', href: 'https://github.com/babylonagent' },
   { label: 'X', href: 'https://x.com/babylon_agent' },
   { label: 'Granary', href: 'https://babylon-granary.vercel.app' },
-  { label: 'Base', href: 'https://base.org' },
+  { label: 'Shield', href: 'https://shield.babylon-agent.com' },
 ]
 
 const fallbackPushes: Push[] = [
@@ -43,12 +43,12 @@ const fallbackPushes: Push[] = [
 ]
 
 const normalizeAscii = (source: string) => {
-  const lines = source.replace(/^\n|\n$/g, '').split('\n').map((line) => line.replace(/\s+$/g, ''))
+  const lines = source.replace(/\r/g, '').replace(/^\n|\n$/g, '').split('\n').map((line) => line.replace(/\s+$/g, ''))
   const leftPad = Math.min(...lines.filter((line) => line.trim()).map((line) => line.match(/^\s*/)?.[0].length ?? 0))
   return lines.map((line) => line.slice(leftPad)).join('\n')
 }
 
-const asciiPlaceholder = normalizeAscii(String.raw`
+const desktopAscii = normalizeAscii(String.raw`
                   #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.  =#%%%%%%%%%%.   .       =%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#.                
                 .#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%..#%%%%%%%%%%%%. .%%+      -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#                
                 *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%..%%%%%%%%%%%%%. .%%+      -%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*.              
@@ -78,13 +78,73 @@ const asciiPlaceholder = normalizeAscii(String.raw`
                 .#%%%%%%%%%%%%%%%%%# .#%%%%%%%*   .%%%%%%%%#        .%%%%%%=  .#%%%%-        :%%%%%%%%%%%%%%%%%*                
 `)
 
+const tabletAscii = normalizeAscii(String.raw`
+
+            :*%%%%%%%%%%%%%%%%%%%%%%%%-:*%%%%%%%%+ .#+    :*%%%%%%%%%%%%%%%%%%%%%%%+.           
+           .+%%%%%%%%%%%%%%%%%%%%%%%%%--#%%%%%%%%+ :%*    :*%%%%%%%%%%%%%%%%%%%%%%%%+.          
+          .=%%%%%%%%%%%%%%%%%%%%%%%%%%--#%%%%%%%#+ :#*    :*%%%%%%%%%%%%%%%%%%%%%%%%#-          
+          -#%%%%%%%%%%%%%%%%%%%%%%%%%#--#%=.              :*%%%%%%%%%%%%%%%%%%%%%%%%%*:         
+         .+%%%%%%%%%%%%%%%%%%%%%%%%+:..+%%=.                .=#%%%%%%%%%%%%%%%%%%%%%%%=.        
+         -#%%%%%%%%%%%%%%%%%%%%%%%*:-#%%%%=.-#%+    .*%*-    .+%%%%%%%%%%%%%%%%%%%%%%%*:        
+        .=%%%%%%%%%%%%%%%%%%%%%%%%*:+%%%%%=.=#%*    .#%#-    .+%%%%%%%%%%%%%%%%%%%%%%%%-        
+        :*%%%%%%%%%%%%%%%%%%%%%%%%*:+%%%%%=.=#%*    .#%#-    .+%%%%%%%%%%%%%%%%%%%%%%%%=.       
+        :#%%%%%%%%%%%%%%%%%%%%%%%%*:=*+=--. .:::::.  .::.    .+%%%%%%%%%%%%%%%%%%%%%%%%+.       
+        :#%%%%%%%%%%%%%%%%%%%%%%#=:...-=+**#%%%%%%#.          :=*%%%%%%%%%%%%%%%%%%%%%%*:       
+        :#%%%%%%%%%%%%%%%%%%%%#=..=*#%%%%%%%%%%%%%#.    .:.      -#%%%%%%%%%%%%%%%%%%%%*:       
+        :*%%%%%%%%%%%%%%%%%%%%#-:*%%%%%*=+#%%%%%%%#.   :*%%=.    .*%%%%%%%%%%%%%%%%%%%%+.       
+        .*%%%%%%%%%%%%%%%%%%%%#-:#%%%%#- :*%%%%%%%#.   :#%%+.    .*%%%%%%%%%%%%%%%%%%%%=.       
+        .=%%%%%%%%%%%%%%%%%%%%#-:#%%%%#- :*%%%%%%%%:   -#%%+.    .*%%%%%%%%%%%%%%%%%%%%-        
+         -#%%%%%%%%%%%%%%%%%%%#-:#%###*: .:::......    :+*#+.    .*%%%%%%%%%%%%%%%%%%%*:        
+         .+%%%%%%%%%%%%%%%%%%%*: . ...:=+**#%%%%%%%%###+:        .*%%%%%%%%%%%%%%%%%%%=.        
+          -#%%%%%%%%%%%%%%%#:  :+#%%%%%%%%%%%%%%%%%%%%%%+           .*%%%%%%%%%%%%%%%*:         
+          .=%%%%%%%%%%%%%%#..*%%%%%%%%%%%%%%%#:...-%%%%%+             *%%%%%%%%%%%%%#-          
+           .+%%%%%%%%%%%%%#.=%%%%%%*-+#%%%%%%:     -%%%%+  -##*:      +%%%%%%%%%%%%%=.          
+            :*%%%%%%%%%%%%#.=%%%%%*: .+%%%%%#.     :%%%%+ .+%%#-      +%%%%%%%%%%%%+.           
+
+`)
+
+const phoneAscii = normalizeAscii(String.raw`
+
+         -%%%%%%%%%%%%%%%%%%#:#%%%%%#:.#:   *%%%%%%%%%%%%%%%%%#.        
+        :#%%%%%%%%%%%%%%%%%%#:#%%%%%#:.%:   *%%%%%%%%%%%%%%%%%%+        
+        *%%%%%%%%%%%%%%%%%%%#:##-:...  ..   *%%%%%%%%%%%%%%%%%%%=       
+       =%%%%%%%%%%%%%%%%%%+.:+%#. :.    ..    +%%%%%%%%%%%%%%%%%#.      
+      .#%%%%%%%%%%%%%%%%%%-*%%%#.+%*   :##-   .%%%%%%%%%%%%%%%%%%=      
+      :#%%%%%%%%%%%%%%%%%%-*%%%#.+%*   :##-   .%%%%%%%%%%%%%%%%%%+.     
+      -%%%%%%%%%%%%%%%%%%%-==:.. .:--:  ..    .%%%%%%%%%%%%%%%%%%*.     
+      -%%%%%%%%%%%%%%%%#- :=*#%%%%%%%%:         -#%%%%%%%%%%%%%%%*.     
+      -%%%%%%%%%%%%%%%%--#%%%#+#%%%%%%:  .*%+    -%%%%%%%%%%%%%%%*.     
+      :#%%%%%%%%%%%%%%%=-%%%%= -%%%%%%:  .%%*.   -%%%%%%%%%%%%%%%+.     
+       #%%%%%%%%%%%%%%%=-%%%%= -######:  .#%*.   -%%%%%%%%%%%%%%%=      
+       -%%%%%%%%%%%%%%%-.:...:=++*******+=.      :%%%%%%%%%%%%%%#.      
+        *%%%%%%%%%%%*..-*%%%%%%%%%%###%%%%=        .*%%%%%%%%%%%-       
+        :#%%%%%%%%%%.=%%%%%%%%%%%%:   =%%%= .++.    :#%%%%%%%%%+        
+         -%%%%%%%%%%.+%%%%- :%%%%#    .%%%= -%%=    :#%%%%%%%%*.        
+
+`)
+
+const selectAscii = () => {
+  if (typeof window === 'undefined') return desktopAscii
+  if (window.matchMedia('(max-width: 640px)').matches) return phoneAscii
+  if (window.matchMedia('(max-width: 1024px)').matches) return tabletAscii
+  return desktopAscii
+}
+
 function App() {
   const [pushes, setPushes] = useState<Push[]>(fallbackPushes)
+  const [asciiText, setAsciiText] = useState(selectAscii)
+
+  useEffect(() => {
+    const updateAscii = () => setAsciiText(selectAscii())
+    updateAscii()
+    window.addEventListener('resize', updateAscii)
+    return () => window.removeEventListener('resize', updateAscii)
+  }, [])
 
   useEffect(() => {
     const cleanup = initBabylonAsciiGlitch()
     return cleanup
-  }, [])
+  }, [asciiText])
 
   useEffect(() => {
     const repos = ['babylon-agent-website', 'granary', 'chancy']
@@ -128,7 +188,7 @@ function App() {
 
       <section className="canvas" aria-label="Babylon landing canvas">
         <div className="copy-block">
-          <h1>Autonomous infrastructure for Base.</h1>
+          <h1>Autonomous onchain infrastructure</h1>
           <p>
             Babylon builds public tools, utility dApps, monitoring flows, and deployment surfaces for builders on Base.
           </p>
@@ -138,8 +198,8 @@ function App() {
           <pre
             id="babylon-ascii"
             className="ascii-stage ascii-base"
-            data-ascii-text={asciiPlaceholder}
-          >{asciiPlaceholder}</pre>
+            data-ascii-text={asciiText}
+          >{asciiText}</pre>
           <pre
             id="babylon-ascii-glitch"
             className="ascii-stage ascii-glitch"
@@ -152,6 +212,49 @@ function App() {
           <span>Tools</span>
           <span>Utility dApps</span>
           <span>Monitoring</span>
+        </div>
+      </section>
+
+      <section className="roadmap-section" aria-label="Roadmap">
+        <div className="section-title">
+          <h2>Roadmap</h2>
+          <p>We started by building tools that are critical for our own projects, then decided to make them public so the wider agentic builder ecosystem can benefit too.</p>
+        </div>
+
+        <div className="roadmap-grid">
+          <article className="glass-panel">
+            <span>Factory</span>
+            <h3>Babylon is the main factory for onchain games, tools, dApps, and deployment surfaces.</h3>
+          </article>
+          <article className="glass-panel">
+            <span>Public goods</span>
+            <h3>Tools built first for ourselves become public interfaces, SDKs, and APIs when they can help other builders.</h3>
+          </article>
+          <article className="glass-panel">
+            <span>Builder agents</span>
+            <h3>Next, Babylon expands toward a small, effective team of builder agents using current frontier LLM systems.</h3>
+          </article>
+        </div>
+      </section>
+
+      <section className="resource-section" aria-label="Builder links">
+        <div className="section-title compact">
+          <h2>Builder links</h2>
+          <a href="https://github.com/babylonagent" target="_blank" rel="noreferrer">All repos <ArrowUpRight size={14} /></a>
+        </div>
+        <div className="resource-grid">
+          <a className="resource-link" href="https://docs.base.org/ai-agents/quickstart" target="_blank" rel="noreferrer">
+            <span>MCP</span><strong>Base MCP quickstart</strong><ArrowUpRight size={14} />
+          </a>
+          <a className="resource-link" href="https://github.com/babylonagent/babylon-shield/tree/main/packages/sdk" target="_blank" rel="noreferrer">
+            <span>SDK</span><strong>Babylon Shield SDK</strong><ArrowUpRight size={14} />
+          </a>
+          <a className="resource-link" href="https://github.com/babylonagent/babylon-shield" target="_blank" rel="noreferrer">
+            <span>API</span><strong>Shield API + examples</strong><ArrowUpRight size={14} />
+          </a>
+          <div className="resource-link muted">
+            <span>NPM</span><strong>Package publish pending</strong>
+          </div>
         </div>
       </section>
 
