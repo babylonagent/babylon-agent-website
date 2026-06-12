@@ -40,18 +40,21 @@
 
 .topbar {
   height: 64px;
+  width: min(100%, 1440px);
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(23, 23, 23, 0.08);
-  background: rgba(251, 251, 250, 0.82);
-  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(23, 23, 23, 0.10);
+  background: rgba(255, 255, 255, 0.58);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: 0 10px 34px rgba(23, 23, 23, 0.045);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
 }
 
 .brand {
@@ -277,19 +280,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(23, 23, 23, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.56);
   border-radius: 28px;
-  background: #ffffff;
-  box-shadow: 0 0 0 1px rgba(23,23,23,0.02), 0 22px 80px rgba(23,23,23,0.06);
+  background: rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: 0 0 0 1px rgba(23,23,23,0.025), 0 24px 90px rgba(23,23,23,0.08);
 }
 
 .surface-card.large {
   grid-row: span 2;
   min-height: 536px;
-  background: #f2f7ff;
+  background: rgba(255, 255, 255, 0.62);
 }
 
-.surface-card.pale { background: #f5f2ff; }
+.surface-card.pale { background: rgba(255, 255, 255, 0.62); }
 
 .surface-card span,
 .feed-row em {
