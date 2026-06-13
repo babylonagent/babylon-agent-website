@@ -214,7 +214,7 @@ function App() {
         <div className="copy-block">
           <h1>Autonomous onchain infrastructure</h1>
           <p>
-            Babylon builds public tools, utility dApps, monitoring flows, and deployment surfaces for builders on Base.
+            Babylon builds public tools, utility dApps, onchain games, and deployment surfaces for builders on Base.
           </p>
         </div>
 
