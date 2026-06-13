@@ -228,7 +228,9 @@
 .feed-section,
 .roadmap-section,
 .token-section,
-.resource-section {
+.resource-section,
+.terminal-mark-section,
+.site-footer {
   max-width: 1440px;
   margin: 0 auto;
   padding: 72px 32px;
@@ -330,10 +332,19 @@
 .resource-link {
   min-height: 132px;
   color: #171717;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.resource-link:not(.muted):hover {
+  transform: translateY(-3px);
+  border-color: rgba(23, 23, 23, 0.18);
+  box-shadow: 0 0 0 1px rgba(23,23,23,0.04), 0 28px 96px rgba(23,23,23,0.12);
 }
 
 .resource-link svg { align-self: flex-end; }
 .resource-link.muted { color: #5f6368; }
+.resource-link.muted:hover { cursor: default; }
 
 .surface-card {
   min-height: 260px;
@@ -431,6 +442,74 @@
   line-height: 1.35;
 }
 
+.terminal-mark-section {
+  padding-top: 36px;
+  padding-bottom: 18px;
+  overflow-x: auto;
+}
+
+.terminal-mark-section pre {
+  margin: 0;
+  width: max-content;
+  min-width: 100%;
+  color: #171717;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.05;
+  white-space: pre;
+}
+
+.site-footer {
+  padding-top: 24px;
+  padding-bottom: 54px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  border-top: 1px solid rgba(23, 23, 23, 0.12);
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #171717;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.site-footer p {
+  margin: 16px 0 0;
+  max-width: 430px;
+  color: #5f6368;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px 22px;
+}
+
+.footer-links a {
+  color: #5f6368;
+  font-size: 13px;
+  font-weight: 620;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.footer-links a:hover { color: #171717; }
+
 @media (max-width: 840px) {
   .topbar { padding: 0 18px; }
   .top-links { gap: 12px; }
@@ -446,9 +525,13 @@
   .summary-strip { grid-template-columns: 1fr 1fr; }
   .summary-strip span:nth-child(2) { border-right: 0; }
   .summary-strip span:nth-child(-n + 2) { border-bottom: 1px solid rgba(23, 23, 23, 0.12); }
-  .work-section, .feed-section, .roadmap-section, .token-section, .resource-section { padding: 48px 18px; }
+  .work-section, .feed-section, .roadmap-section, .token-section, .resource-section, .terminal-mark-section, .site-footer { padding: 48px 18px; }
   .roadmap-section { padding-top: 42px; }
   .token-section, .resource-section { padding-top: 28px; }
+  .terminal-mark-section { padding-top: 28px; padding-bottom: 12px; }
+  .terminal-mark-section pre { font-size: 9px; }
+  .site-footer { padding-top: 22px; padding-bottom: 44px; flex-direction: column; }
+  .footer-links { justify-content: flex-start; }
   .work-grid, .roadmap-grid, .resource-grid { grid-template-columns: 1fr; }
   .surface-card.large { min-height: 380px; }
   .feed-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 0; }

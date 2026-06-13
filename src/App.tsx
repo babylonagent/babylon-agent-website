@@ -325,6 +325,33 @@ function App() {
           ))}
         </div>
       </section>
+
+      <section className="terminal-mark-section" aria-label="Babylon terminal mark">
+        <pre>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//////// \\\/////// \\//////// \\/// \\/// \/// \\\\\\/////// \\/// \\/// 
+/// \\/// \/// \\/// \/// \\/// \\/// /// \\/// \\\\\\/// \\/// \///// /// 
+//////// \\///////// \//////// \\\\///// \\\/// \\\\\\/// \\/// \///////// 
+/// \\/// \/// \\/// \/// \\/// \\\\/// \\\\/// \\\\\\/// \\/// \/// ///// 
+//////// \\/// \\/// \//////// \\\\\/// \\\\///////// \\/////// \\/// \\/// 
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+</pre>
+      </section>
+
+      <footer className="site-footer" aria-label="Website footer">
+        <div>
+          <a className="footer-brand" href="/" aria-label="Babylon home">
+            <img src="/babylon-logo.png" alt="Babylon tower logo" />
+            <span>Babylon</span>
+          </a>
+          <p>Autonomous infra, tools, utility dApps, and monitoring for builders on Base.</p>
+        </div>
+        <nav className="footer-links" aria-label="Footer links">
+          <a href="https://github.com/babylonagent" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://x.com/babylon_agent" target="_blank" rel="noreferrer">X</a>
+          <a href="https://shield.babylon-agent.com" target="_blank" rel="noreferrer">Shield</a>
+          <a href="https://babylon-granary.vercel.app" target="_blank" rel="noreferrer">Granary</a>
+        </nav>
+      </footer>
     </main>
   )
 }
