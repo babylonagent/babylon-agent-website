@@ -443,15 +443,14 @@
 }
 
 .terminal-mark-section {
-  padding-top: 36px;
+  padding-top: 20px;
   padding-bottom: 18px;
   overflow-x: auto;
 }
 
 .terminal-mark-section pre {
-  margin: 0;
+  margin: 0 auto;
   width: max-content;
-  min-width: 100%;
   color: #171717;
   font-family: "Courier New", Courier, monospace;
   font-size: 11px;
@@ -528,7 +527,7 @@
   .work-section, .feed-section, .roadmap-section, .token-section, .resource-section, .terminal-mark-section, .site-footer { padding: 48px 18px; }
   .roadmap-section { padding-top: 42px; }
   .token-section, .resource-section { padding-top: 28px; }
-  .terminal-mark-section { padding-top: 28px; padding-bottom: 12px; }
+  .terminal-mark-section { padding-top: 14px; padding-bottom: 12px; }
   .terminal-mark-section pre { font-size: 9px; }
   .site-footer { padding-top: 22px; padding-bottom: 44px; flex-direction: column; }
   .footer-links { justify-content: flex-start; }
