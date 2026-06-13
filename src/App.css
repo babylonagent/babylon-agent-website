@@ -357,6 +357,28 @@
 
 .surface-card.pale { background: rgba(255, 255, 255, 0.62); }
 
+.project-card {
+  color: #171717;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(23, 23, 23, 0.18);
+  box-shadow: 0 0 0 1px rgba(23,23,23,0.04), 0 28px 96px rgba(23,23,23,0.12);
+}
+
+.project-card em {
+  margin-top: 24px;
+  color: #8a8f98;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.project-card.large em { margin-top: 34px; }
+
 .surface-card span,
 .feed-row em {
   color: #8a8f98;

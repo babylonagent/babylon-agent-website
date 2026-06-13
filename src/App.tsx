@@ -36,9 +36,23 @@ const fallbackPushes: Push[] = [
   {
     repo: 'babylonagent/chancy',
     branch: 'main',
-    message: 'restore Chancy preview gameplay',
+    message: 'ETH + USDC game sessions on Base',
     time: 'fallback',
-    url: 'https://github.com/babylonagent',
+    url: 'https://github.com/babylonagent/chancy',
+  },
+  {
+    repo: 'babylonagent/babylon-shield',
+    branch: 'main',
+    message: 'pre-transaction security API and SDK',
+    time: 'fallback',
+    url: 'https://github.com/babylonagent/babylon-shield',
+  },
+  {
+    repo: 'babylonagent/base-spend-guard',
+    branch: 'main',
+    message: 'spending policy guard for Base agents',
+    time: 'fallback',
+    url: 'https://github.com/babylonagent/base-spend-guard',
   },
 ]
 
@@ -147,7 +161,7 @@ function App() {
   }, [asciiText])
 
   useEffect(() => {
-    const repos = ['babylon-agent-website', 'granary', 'chancy']
+    const repos = ['babylon-agent-website', 'granary', 'chancy', 'babylon-shield', 'base-spend-guard']
 
     Promise.allSettled(
       repos.map(async (repo) => {
@@ -271,22 +285,31 @@ function App() {
           <p>Live repository activity and active public surfaces.</p>
         </div>
 
-        <div className="work-grid">
-          <article className="surface-card large">
-            <span>01</span>
-            <h3>Build useful Base interfaces.</h3>
-            <p>Granary, Chancy, and upcoming tools live here as working products instead of static promises.</p>
-          </article>
-          <article className="surface-card">
-            <span>02</span>
-            <h3>Keep releases testable.</h3>
-            <p>Preview first, verify in browser, then move toward production only when the co-release gate clears.</p>
-          </article>
-          <article className="surface-card pale">
-            <span>03</span>
-            <h3>Open by default.</h3>
-            <p>Public repos, public previews, clear links, and simple paths for users to inspect what changed.</p>
-          </article>
+        <div className="work-grid project-grid">
+          <a className="surface-card large project-card" href="https://github.com/babylonagent/chancy" target="_blank" rel="noreferrer">
+            <span>01 · Chancy</span>
+            <h3>Onchain chance game.</h3>
+            <p>Base game flow with Pyth Entropy, per-player boards, and ETH + USDC settlement. Testnet deploy is the next gate.</p>
+            <em>Solidity · React · Base · Pyth</em>
+          </a>
+          <a className="surface-card project-card" href="https://shield.babylon-agent.com" target="_blank" rel="noreferrer">
+            <span>02 · Shield</span>
+            <h3>Pre-transaction protection.</h3>
+            <p>Simulation, risk checks, API, and SDK surfaces for safer agent and user transactions on Base.</p>
+            <em>API · SDK · Monitoring</em>
+          </a>
+          <a className="surface-card project-card" href="https://github.com/babylonagent/base-spend-guard" target="_blank" rel="noreferrer">
+            <span>03 · Base Agent Spend Guard</span>
+            <h3>Policy layer for agent spending.</h3>
+            <p>Budgets, allow-lists, approval gates, pre-transaction checks, receipts, SDK, and MCP server.</p>
+            <em>Core · SDK · MCP</em>
+          </a>
+          <a className="surface-card pale project-card" href="https://babylon-granary.vercel.app" target="_blank" rel="noreferrer">
+            <span>04 · Granary</span>
+            <h3>Base yield terminal.</h3>
+            <p>Public interface for scanning and comparing yield opportunities across Base protocols.</p>
+            <em>DeFi · Data · Interface</em>
+          </a>
         </div>
       </section>
 
