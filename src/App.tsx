@@ -348,10 +348,10 @@ function App() {
           <p>Autonomous infra, tools, utility dApps, and monitoring for builders on Base.</p>
         </div>
         <nav className="footer-links" aria-label="Footer links">
-          <a href="https://github.com/babylonagent" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://x.com/babylon_agent" target="_blank" rel="noreferrer">X</a>
-          <a href="https://shield.babylon-agent.com" target="_blank" rel="noreferrer">Shield</a>
-          <a href="https://babylon-granary.vercel.app" target="_blank" rel="noreferrer">Granary</a>
+          <a href="/">Babylon</a>
+          <a href="https://docs.base.org/ai-agents/quickstart" target="_blank" rel="noreferrer">MCP</a>
+          <a href="https://github.com/babylonagent/babylon-shield/tree/main/packages/sdk" target="_blank" rel="noreferrer">SDK</a>
+          <span>NPM soon</span>
         </nav>
       </footer>
     </main>

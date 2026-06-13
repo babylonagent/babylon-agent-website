@@ -461,7 +461,7 @@
 
 .site-footer {
   padding-top: 24px;
-  padding-bottom: 54px;
+  padding-bottom: 18px;
   display: flex;
   justify-content: space-between;
   gap: 32px;
@@ -499,7 +499,8 @@
   gap: 14px 22px;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-links span {
   color: #5f6368;
   font-size: 13px;
   font-weight: 620;
@@ -529,7 +530,7 @@
   .token-section, .resource-section { padding-top: 28px; }
   .terminal-mark-section { padding-top: 14px; padding-bottom: 12px; }
   .terminal-mark-section pre { font-size: 9px; }
-  .site-footer { padding-top: 22px; padding-bottom: 44px; flex-direction: column; }
+  .site-footer { padding-top: 22px; padding-bottom: 18px; flex-direction: column; }
   .footer-links { justify-content: flex-start; }
   .work-grid, .roadmap-grid, .resource-grid { grid-template-columns: 1fr; }
   .surface-card.large { min-height: 380px; }
