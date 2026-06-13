@@ -304,12 +304,6 @@ function App() {
             <p>Budgets, allow-lists, approval gates, pre-transaction checks, receipts, SDK, and MCP server.</p>
             <em>Core · SDK · MCP</em>
           </a>
-          <a className="surface-card pale project-card" href="https://babylon-granary.vercel.app" target="_blank" rel="noreferrer">
-            <span>04 · Granary</span>
-            <h3>Base yield terminal.</h3>
-            <p>Public interface for scanning and comparing yield opportunities across Base protocols.</p>
-            <em>DeFi · Data · Interface</em>
-          </a>
         </div>
       </section>
 
